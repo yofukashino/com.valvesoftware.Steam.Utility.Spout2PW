@@ -1,20 +1,17 @@
-# com.valvesoftware.Steam.Utility.steamtinkerlaunch
+# com.valvesoftware.Steam.Utility.Spout2PW
 
-Flatpak for [SteamTinkerLaunch](https://github.com/sonic2kk/steamtinkerlaunch/).
+Flatpak for [Spout2PW](https://github.com/hoshinolina/spout2pw).
 
 Only for use with Flatpak Steam. Does not work on Steam Deck.
 
 ## Install
 
-`flatpak install com.valvesoftware.Steam.Utility.steamtinkerlaunch`
+`flatpak install com.valvesoftware.Steam.Utility.Spout2PW`
 
 ## Usage
-[Read the SteamTinkerLaunch Flatpak Wiki page](https://github.com/sonic2kk/steamtinkerlaunch/wiki/Steam-Flatpak)
+
+[Read the SteamTinkerLaunch Flatpak Wiki page](https://github.com/hoshinolina/spout2pw/wiki)
 
 ## Uninstall
 
-`flatpak uninstall com.valvesoftware.Steam.Utility.steamtinkerlaunch`
-
-You may also want to delete:
-
-`~/.var/app/com.valvesoftware.Steam/.config/steamtinkerlaunch/`
+`flatpak uninstall com.valvesoftware.Steam.Utility.Spout2PW`
