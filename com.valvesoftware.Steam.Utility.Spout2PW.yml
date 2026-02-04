@@ -5,31 +5,25 @@ branch: stable
 sdk: org.freedesktop.Sdk//25.08
 build-extension: true
 separate-locales: false
-appstream-compose: false
 
 modules:
   - name: spout2pw
     buildsystem: simple
-    build-options:
-      env:
-        PREFIX: ${FLATPAK_DEST}
     build-commands:
       - mkdir -p ${FLATPAK_DEST}/share/spout2pw
       - cp -a . ${FLATPAK_DEST}/share/spout2pw
       - chmod +x ${FLATPAK_DEST}/share/spout2pw/spout2pw.sh
       - mkdir -p ${FLATPAK_DEST}/bin
       - ln -sf ../share/spout2pw/spout2pw.sh ${FLATPAK_DEST}/bin/spout2pw
+    post-install:
+      - install -Dpm0644 -t ${FLATPAK_DEST}/share/metainfo ${FLATPAK_ID}.metainfo.xml
     sources:
       - type: archive
         url: https://github.com/hoshinolina/spout2pw/releases/download/0.1.4/spout2pw-0.1.4-bin.tar.gz
         sha256: 3f9b9806174abec0a8cc70eb372f170a2623c92118c4207507244e6fefe1f9bd
-        strip-components: 1
-
-  - name: metadata
-    buildsystem: simple
-    build-commands:
-      - install -Dm644 -t ${FLATPAK_DEST}/share/metainfo ${FLATPAK_ID}.metainfo.xml
-      - appstreamcli compose --components=${FLATPAK_ID} --prefix=/ --origin=${FLATPAK_ID} --result-root=${FLATPAK_DEST} --data-dir=${FLATPAK_DEST}/share/app-info/xmls ${FLATPAK_DEST}
-    sources:
+        x-checker-data:
+          "type": "anitya"
+          "project-id": 147
+          "url-template": "https://github.com/hoshinolina/spout2pw/releases/download/$version/spout2pw-$version-bin.tar.gz"
       - type: file
         path: com.valvesoftware.Steam.Utility.Spout2PW.metainfo.xml
