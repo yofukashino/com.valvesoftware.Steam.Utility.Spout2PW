@@ -27,7 +27,8 @@ modules:
           tag-query: .tag_name
           version-query: $tag | sub("^jq-"; "")
           timestamp-query: .published_at
-          url-query: .assets[] | select(.name == ("spout2pw-" + $tag + "-bin.tar.gz"))
+          url-query:
+            .assets[] | select(.name == ("spout2pw-" + $tag + "-bin.tar.gz"))
             | .browser_download_url
       - type: file
         path: com.valvesoftware.Steam.Utility.Spout2PW.metainfo.xml
