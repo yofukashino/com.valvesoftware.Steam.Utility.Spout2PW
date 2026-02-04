@@ -19,11 +19,7 @@ modules:
       - install -Dpm0644 -t ${FLATPAK_DEST}/share/metainfo ${FLATPAK_ID}.metainfo.xml
     sources:
       - type: archive
-        url: https://github.com/hoshinolina/spout2pw/releases/download/0.1.4/spout2pw-0.1.4-bin.tar.gz
-        sha256: 3f9b9806174abec0a8cc70eb372f170a2623c92118c4207507244e6fefe1f9bd
-        x-checker-data:
-          "type": "anitya"
-          "project-id": 147
-          "url-template": "https://github.com/hoshinolina/spout2pw/releases/download/$version/spout2pw-$version-bin.tar.gz"
+        sha256: 2d032e6b8ffc3e76332bf31bc79abdc1d733f87265056cd4fd226af643ecd91a
+        url: https://github.com/hoshinolina/spout2pw/releases/download/0.1.2/spout2pw-0.1.2-bin.tar.gz
       - type: file
         path: com.valvesoftware.Steam.Utility.Spout2PW.metainfo.xml
