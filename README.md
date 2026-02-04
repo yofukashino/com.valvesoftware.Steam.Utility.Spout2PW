@@ -10,7 +10,7 @@ Only for use with Flatpak Steam. Does not work on Steam Deck.
 
 ## Usage
 
-[Read the SteamTinkerLaunch Flatpak Wiki page](https://github.com/hoshinolina/spout2pw/wiki)
+[Read the Spout2pw Wiki page](https://github.com/hoshinolina/spout2pw/wiki)
 
 ## Uninstall
 
