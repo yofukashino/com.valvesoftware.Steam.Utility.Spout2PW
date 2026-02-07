@@ -14,6 +14,9 @@
   <project_license>LGPL-2.1</project_license>
 
   <releases>
+    <release version="0.1.5" date="2026-02-07">
+      <url type="details">https://github.com/hoshinolina/spout2pw/releases/tag/0.1.5</url>
+    </release>
     <release version="0.1.4" date="2026-02-04">
       <url type="details">https://github.com/hoshinolina/spout2pw/releases/tag/0.1.4</url>
     </release>

@@ -19,8 +19,8 @@ modules:
       - install -Dpm0644 -t ${FLATPAK_DEST}/share/metainfo ${FLATPAK_ID}.metainfo.xml
     sources:
       - type: archive
-        sha256: 3f9b9806174abec0a8cc70eb372f170a2623c92118c4207507244e6fefe1f9bd
-        url: https://github.com/hoshinolina/spout2pw/releases/download/0.1.4/spout2pw-0.1.4-bin.tar.gz
+        sha256: 3ad25c4b4eec73c4488efa4901f7928760c945192dc86f892b7d499760534f1d
+        url: https://github.com/hoshinolina/spout2pw/releases/download/0.1.5/spout2pw-0.1.5-bin.tar.gz
         x-checker-data:
           type: json
           url: https://api.github.com/repos/hoshinolina/spout2pw/releases/latest
