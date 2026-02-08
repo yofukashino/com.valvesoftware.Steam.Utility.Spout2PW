@@ -60,8 +60,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/hoshinolina/spout2pw.git
-        tag: 0.1.5
-        commit: 0ad2adbf7e6bdbbf949606c5db0390f6bfcb33da
+        tag: 0.1.6
+        commit: 857dddbea8644c57126b6aa4bcfcb97494ea0bca
         x-checker-data:
           type: git
           is-main-source: true
