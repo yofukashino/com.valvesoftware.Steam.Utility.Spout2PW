@@ -5,30 +5,66 @@ branch: stable
 sdk: org.freedesktop.Sdk//25.08
 build-extension: true
 separate-locales: false
-
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.mingw-w64
+build-options:
+  prefix: /app/utils/Spout2PW
+  append-path: /usr/lib/sdk/mingw-w64/bin
+  strip: true
+cleanup:
+  - /wine
 modules:
+  - name: wine
+    buildsystem: autotools
+    config-opts:
+      - --prefix=${FLATPAK_DEST}/wine
+      - --disable-tests
+      - --without-x
+      - --without-wayland
+      - --without-alsa
+      - --without-pulse
+      - --without-cups
+      - --without-dbus
+      - --without-gstreamer
+      - --without-opengl
+      - --without-vulkan
+      - --enable-win64
+      - --with-mingw="x86_64-w64-mingw32-gcc"
+    sources:
+      - type: archive
+        url: https://dl.winehq.org/wine/source/11.0/wine-11.0.tar.xz
+        sha256: c07a6857933c1fc60dff5448d79f39c92481c1e9db5aa628db9d0358446e0701
+        x-checker-data:
+          type: html
+          url: https://gitlab.winehq.org/wine/wine/-/raw/stable/VERSION
+          version-pattern: Wine version (\d[\d\w\.-]+\d)
+          url-template: https://dl.winehq.org/wine/source/$major.$minor/wine-$version.tar.xz
+          is-main-source: true
   - name: spout2pw
     buildsystem: simple
+    build-options:
+      prepend-path: /app/utils/Spout2PW/wine/bin
+      env:
+        LDFLAGS: ""
+      strip: true
     build-commands:
+      - chmod +x build.sh
+      - ./build.sh
       - mkdir -p ${FLATPAK_DEST}/share/spout2pw
-      - cp -a . ${FLATPAK_DEST}/share/spout2pw
+      - cp -a build/pkg/* ${FLATPAK_DEST}/share/spout2pw/
       - chmod +x ${FLATPAK_DEST}/share/spout2pw/spout2pw.sh
       - mkdir -p ${FLATPAK_DEST}/bin
       - ln -sf ../share/spout2pw/spout2pw.sh ${FLATPAK_DEST}/bin/spout2pw
     post-install:
       - install -Dpm0644 -t ${FLATPAK_DEST}/share/metainfo ${FLATPAK_ID}.metainfo.xml
     sources:
-      - type: archive
-        sha256: 3ad25c4b4eec73c4488efa4901f7928760c945192dc86f892b7d499760534f1d
-        url: https://github.com/hoshinolina/spout2pw/releases/download/0.1.5/spout2pw-0.1.5-bin.tar.gz
+      - type: git
+        url: https://github.com/hoshinolina/spout2pw.git
+        tag: 0.1.5
+        commit: 0ad2adbf7e6bdbbf949606c5db0390f6bfcb33da
         x-checker-data:
-          type: json
-          url: https://api.github.com/repos/hoshinolina/spout2pw/releases/latest
-          tag-query: .tag_name
-          version-query: $tag | sub("^jq-"; "")
-          timestamp-query: .published_at
-          url-query:
-            .assets[] | select(.name == ("spout2pw-" + $tag + "-bin.tar.gz"))
-            | .browser_download_url
+          type: git
+          is-main-source: true
+          tag-pattern: ^([\d.]+)$
       - type: file
         path: com.valvesoftware.Steam.Utility.Spout2PW.metainfo.xml
