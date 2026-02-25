@@ -1,7 +1,6 @@
 id: com.valvesoftware.Steam.Utility.Spout2PW
 runtime: com.valvesoftware.Steam
 runtime-version: stable
-branch: stable
 sdk: org.freedesktop.Sdk//25.08
 build-extension: true
 separate-locales: false
