@@ -11,40 +11,12 @@ build-options:
   strip: true
   prefix: /app/utils/Spout2PW
   append-path: /usr/lib/sdk/mingw-w64/bin
-cleanup:
-  - /wine
 modules:
-  - name: wine
-    buildsystem: autotools
-    config-opts:
-      - --prefix=${FLATPAK_DEST}/wine
-      - --disable-tests
-      - --without-x
-      - --without-wayland
-      - --without-alsa
-      - --without-pulse
-      - --without-cups
-      - --without-dbus
-      - --without-gstreamer
-      - --without-opengl
-      - --without-vulkan
-      - --enable-win64
-      - --with-mingw="x86_64-w64-mingw32-gcc"
-    sources:
-      - type: archive
-        url: https://dl.winehq.org/wine/source/11.0/wine-11.0.tar.xz
-        sha256: c07a6857933c1fc60dff5448d79f39c92481c1e9db5aa628db9d0358446e0701
-        x-checker-data:
-          type: html
-          url: https://gitlab.winehq.org/wine/wine/-/raw/stable/VERSION
-          version-pattern: Wine version (\d[\d\w\.-]+\d)
-          url-template: https://dl.winehq.org/wine/source/$major.$minor/wine-$version.tar.xz
-          is-main-source: true
   - name: spout2pw
     buildsystem: simple
     build-options:
       strip: true
-      prepend-path: /app/utils/Spout2PW/wine/bin
+      prepend-path: /run/build/spout2pw/wine/bin
       env:
         LDFLAGS: ""
     build-commands:
@@ -60,11 +32,15 @@ modules:
     sources:
       - type: git
         url: https://github.com/hoshinolina/spout2pw.git
-        tag: 0.1.6
-        commit: 857dddbea8644c57126b6aa4bcfcb97494ea0bca
+        tag: 0.1.7
+        commit: fe7c95bacb3a141270ea91a9d7cd126bf6feafd3
         x-checker-data:
           type: git
           is-main-source: true
           tag-pattern: ^([\d.]+)$
+      - type: archive
+        url: https://master.dl.sourceforge.net/project/wine/Slackware%20Packages/11.0/x86_64/wine-11.0-x86_64-1sg.txz
+        sha256: 5a57406ffffff71337da0e69b8ef36d64be18055911a50ce32b202d8d9e5218e
+        dest: wine
       - type: file
         path: com.valvesoftware.Steam.Utility.Spout2PW.metainfo.xml
