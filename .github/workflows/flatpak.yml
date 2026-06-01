@@ -55,6 +55,8 @@ jobs:
           upload-pages-includes: |
             default.css
             index.html
+          flatpak-builder-args: |
+            --default-branch=stable
 
   deploy:
     name: Deploy
