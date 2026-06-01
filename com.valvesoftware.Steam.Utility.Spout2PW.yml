@@ -13,38 +13,15 @@ build-options:
   prefix: /app/utils/Spout2PW
   append-path: /usr/lib/sdk/mingw-w64/bin:/usr/lib/sdk/mingw-w64/x86_64-w64-mingw32/bin/
 modules:
-  - name: libdrm
-    buildsystem: meson
-    cleanup:
-      - /include
-      - /lib/pkgconfig
-      - /share/man
-      - /share/doc
-      - /lib/*.a
-    config-opts:
-      - -Dintel=enabled
-      - -Dradeon=enabled
-      - -Damdgpu=enabled
-      - -Dnouveau=disabled
-      - -Dvmwgfx=disabled
-      - -Domap=disabled
-      - -Dexynos=disabled
-      - -Dfreedreno=disabled
-      - -Dtegra=disabled
-      - -Dvc4=disabled
-      - -Detnaviv=disabled
-      - -Dcairo-tests=disabled
-      - -Dvalgrind=disabled
-      - -Dudev=false
-    sources:
-      - type: archive
-        url: https://dri.freedesktop.org/libdrm/libdrm-2.4.133.tar.xz
-        sha256: fc68f9d0ba2ea63c9432a299e14fea09fad7a8a66e8039fcd7802ca59f77b4f5
   - name: spout2pw
     buildsystem: simple
     build-options:
       strip: true
       prepend-path: /run/build/spout2pw/wine/bin
+      env:
+        LDFLAGS: "-Wl,--allow-shlib-undefined"
+        CFLAGS: "-fno-stack-protector"
+        CXXFLAGS: "-fno-stack-protector"
     build-commands:
       - chmod +x build.sh
       - ./build.sh
