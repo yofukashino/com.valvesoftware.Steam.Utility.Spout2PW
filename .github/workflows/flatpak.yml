@@ -50,7 +50,7 @@ jobs:
             com.valvesoftware.Steam.Utility.Spout2PW.yml
           arch: x86_64
           gpg-sign: ${{ steps.gpg.outputs.fingerprint }}
-          upload-bundles: true
+          upload-bundles: false
           upload-pages-artifact: true
           upload-pages-includes: |
             default.css
