@@ -15,6 +15,12 @@ build-options:
 modules:
   - name: libdrm
     buildsystem: meson
+    cleanup:
+      - /include
+      - /lib/pkgconfig
+      - /share/man
+      - /share/doc
+      - /lib/*.a
     config-opts:
       - -Dintel=enabled
       - -Dradeon=enabled
@@ -38,7 +44,7 @@ modules:
     buildsystem: simple
     build-options:
       strip: true
-      prepend-path: /run/build/spout2pw/wine/bin
+      prepend-path: /run/build/spout2pw/proton/files/bin
       env:
         LDFLAGS: ""
     build-commands:
@@ -61,9 +67,9 @@ modules:
           is-main-source: true
           tag-pattern: ^([\d.]+)$
       - type: archive
-        url: https://master.dl.sourceforge.net/project/wine/Slackware%20Packages/11.0/x86_64/wine-11.0-x86_64-1sg.txz
-        sha256: 5a57406ffffff71337da0e69b8ef36d64be18055911a50ce32b202d8d9e5218e
-        dest: wine
+        url: https://github.com/GloriousEggroll/proton-ge-custom/releases/download/GE-Proton10-34/GE-Proton10-34.tar.gz
+        sha256: 51c580b66a833c73998fe00f0717eeac57197654040a2f2ed5189e3ee68d773d
+        dest: proton
       - type: file
         path: com.valvesoftware.Steam.Utility.Spout2PW.metainfo.xml
       - type: patch
