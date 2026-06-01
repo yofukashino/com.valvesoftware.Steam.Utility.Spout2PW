@@ -13,6 +13,27 @@ build-options:
   prefix: /app/utils/Spout2PW
   append-path: /usr/lib/sdk/mingw-w64/bin
 modules:
+  - name: libdrm
+    buildsystem: meson
+    config-opts:
+      - -Dintel=enabled
+      - -Dradeon=enabled
+      - -Damdgpu=enabled
+      - -Dnouveau=disabled
+      - -Dvmwgfx=disabled
+      - -Domap=disabled
+      - -Dexynos=disabled
+      - -Dfreedreno=disabled
+      - -Dtegra=disabled
+      - -Dvc4=disabled
+      - -Detnaviv=disabled
+      - -Dcairo-tests=disabled
+      - -Dvalgrind=disabled
+      - -Dudev=false
+    sources:
+      - type: archive
+        url: https://dri.freedesktop.org/libdrm/libdrm-2.4.133.tar.xz
+        sha256: fc68f9d0ba2ea63c9432a299e14fea09fad7a8a66e8039fcd7802ca59f77b4f5
   - name: spout2pw
     buildsystem: simple
     build-options:
@@ -45,3 +66,5 @@ modules:
         dest: wine
       - type: file
         path: com.valvesoftware.Steam.Utility.Spout2PW.metainfo.xml
+      - type: patch
+        path: flatpak-runtime.patch

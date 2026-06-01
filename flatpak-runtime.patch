@@ -1,0 +1,12 @@
+diff --git a/misc/spout2pw.sh b/misc/spout2pw.sh
+index 6cc425b..9f88bdf 100755
+--- a/misc/spout2pw.sh
++++ b/misc/spout2pw.sh
+@@ -181,6 +181,7 @@ steamrt_checkpath() {
+         /srv
+         /var/tmp
+         /tmp
++        /app/utils
+ "
+ 
+     dirs=""
