@@ -15,6 +15,12 @@ build-options:
 modules:
   - name: libdrm
     buildsystem: meson
+    cleanup:
+      - /include
+      - /lib/pkgconfig
+      - /share/man
+      - /share/doc
+      - /lib/*.a
     config-opts:
       - -Dintel=enabled
       - -Dradeon=enabled
@@ -39,8 +45,6 @@ modules:
     build-options:
       strip: true
       prepend-path: /run/build/spout2pw/wine/bin
-      env:
-        LDFLAGS: ""
     build-commands:
       - chmod +x build.sh
       - ./build.sh
