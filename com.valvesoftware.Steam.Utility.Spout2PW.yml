@@ -11,7 +11,7 @@ sdk-extensions:
 build-options:
   strip: true
   prefix: /app/utils/Spout2PW
-  append-path: /usr/lib/sdk/mingw-w64/bin
+  append-path: /usr/lib/sdk/mingw-w64/bin:/usr/lib/sdk/mingw-w64/x86_64-w64-mingw32/bin/
 modules:
   - name: libdrm
     buildsystem: meson
