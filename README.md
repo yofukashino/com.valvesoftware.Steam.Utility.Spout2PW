@@ -14,7 +14,7 @@ To install this plugin you need to run this command in a terminal:
 
 ```bash
 flatpak remote-add --user --if-not-exists spout2pw https://yofukashino.github.io/com.valvesoftware.Steam.Utility.Spout2PW/index.flatpakrepo
-flatpak install com.valvesoftware.Steam.Utility.Spout2PW
+flatpak install com.valvesoftware.Steam.Utility.Spout2PW/x86_64/stable
 ```
 
 ## Usage
