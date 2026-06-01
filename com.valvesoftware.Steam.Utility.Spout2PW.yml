@@ -31,8 +31,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/hoshinolina/spout2pw.git
-        tag: 0.1.7
-        commit: fe7c95bacb3a141270ea91a9d7cd126bf6feafd3
+        tag: 0.2.3
+        commit: 13380d5ffce3688669df485e6b703975665d75a0
         x-checker-data:
           type: git
           is-main-source: true
