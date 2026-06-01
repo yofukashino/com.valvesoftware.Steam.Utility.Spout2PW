@@ -41,6 +41,7 @@ jobs:
         run: |
           flatpak install --noninteractive org.freedesktop.Sdk/x86_64/25.08
           flatpak install --noninteractive org.freedesktop.Sdk.Extension.mingw-w64/x86_64/25.08
+          flatpak install --noninteractive com.valvesoftware.Steam/x86_64/stable
 
       - name: Build
         uses: andyholmes/flatter@main
