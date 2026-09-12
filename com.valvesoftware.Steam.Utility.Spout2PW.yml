@@ -34,9 +34,9 @@ modules:
       - install -Dpm0644 -t ${FLATPAK_DEST}/share/metainfo ${FLATPAK_ID}.metainfo.xml
     sources:
       - type: git
-        url: https://github.com/hoshinolina/spout2pw.git
-        tag: 0.2.3
-        commit: 13380d5ffce3688669df485e6b703975665d75a0
+        url: https://github.com/tasokait/spout2pw.git
+        tag: 0.3.0
+        commit: 357a92ea3f35b3216721519f17a0b540b5d4598b
         x-checker-data:
           type: git
           is-main-source: true
