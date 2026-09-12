@@ -15,6 +15,8 @@ build-options:
 modules:
   - name: vulkan-headers
     buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_INSTALL_PREFIX=/app/utils/Spout2PW
     sources:
       - type: archive
         url: https://github.com/KhronosGroup/Vulkan-Headers/archive/v1.3.297/Vulkan-Headers-v1.3.297.tar.gz
@@ -26,11 +28,63 @@ modules:
       prepend-path: /run/build/spout2pw/wine/bin
       env:
         LDFLAGS: "-Wl,--allow-shlib-undefined"
-        CFLAGS: "-fno-stack-protector -I/app/include"
-        CXXFLAGS: "-fno-stack-protector -I/app/include"
+        CFLAGS: "-fno-stack-protector -I/app/utils/Spout2PW/include"
+        CXXFLAGS: "-fno-stack-protector -I/app/utils/Spout2PW/include"
     build-commands:
-      - chmod +x build.sh
-      - ./build.sh
+      - |
+        meson setup build-pw subprojects/pipewire-static \
+        -Dprefix=${FLATPAK_DEST} \
+        -Dexamples=disabled \
+        -Dtests=disabled \
+        -Dgstreamer=disabled \
+        -Dlibsystemd=disabled \
+        -Dlogind=disabled \
+        -Dselinux=disabled \
+        -Dpipewire-alsa=disabled \
+        -Dpipewire-jack=disabled \
+        -Dpipewire-v4l2=disabled \
+        -Dspa-plugins=enabled \
+        -Dudev=disabled \
+        -Dsdl2=disabled \
+        -Dv4l2=disabled \
+        -Dalsa=disabled \
+        -Dx11=disabled \
+        -Dlibffado=disabled \
+        -Dsnap=disabled \
+        -Dopus=disabled \
+        -Dreadline=disabled \
+        -Dgsettings=disabled \
+        -Dsession-managers='[]' \
+        -Ddefault_library=static \
+        -Djack=disabled \
+        -Davahi=disabled \
+        -Draop=disabled \
+        -Davb=disabled \
+        -Dlibpulse=disabled \
+        -Dflatpak=disabled \
+        -Dsupport=enabled \
+        -Dstatic=true \
+        -Dlibdir=lib
+      - ninja -C build-pw
+      - ninja -C build-pw install
+      - ninja -C build-pw
+      - ninja -C build-pw install
+      - |
+        cat > native.txt <<EOF
+        [built-in options]
+        pkg_config_path='${FLATPAK_DEST}/lib/pkgconfig'
+        EOF
+      - |
+        meson setup \
+        --native-file native.txt --cross-file misc/x86_64-w64-mingw32.txt \
+        -Dlibpipewire_static_lib=${FLATPAK_DEST}/lib/libpipewire-static-0.3.a \
+        -Dlibpipewire_static=true build .
+      - ninja -C build install
+      - |
+        meson setup \
+        --native-file native.txt --cross-file misc/x86_64-w64-mingw32.txt \
+        -Dlibpipewire_static=false  dynbuild .
+      - ninja -C dynbuild install
       - mkdir -p ${FLATPAK_DEST}/share/spout2pw
       - cp -a build/pkg/* ${FLATPAK_DEST}/share/spout2pw/
       - chmod +x ${FLATPAK_DEST}/share/spout2pw/spout2pw.sh
@@ -38,6 +92,11 @@ modules:
       - ln -sf ../share/spout2pw/spout2pw.sh ${FLATPAK_DEST}/bin/spout2pw
     post-install:
       - install -Dpm0644 -t ${FLATPAK_DEST}/share/metainfo ${FLATPAK_ID}.metainfo.xml
+    cleanup:
+      - /bin/spa*
+      - /include
+      - /lib
+      - /etc
     sources:
       - type: git
         url: https://github.com/tasokait/spout2pw.git
