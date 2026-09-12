@@ -26,8 +26,8 @@ modules:
       prepend-path: /run/build/spout2pw/wine/bin
       env:
         LDFLAGS: "-Wl,--allow-shlib-undefined"
-        CFLAGS: "-fno-stack-protector"
-        CXXFLAGS: "-fno-stack-protector"
+        CFLAGS: "-fno-stack-protector -I/app/include"
+        CXXFLAGS: "-fno-stack-protector -I/app/include"
     build-commands:
       - chmod +x build.sh
       - ./build.sh
