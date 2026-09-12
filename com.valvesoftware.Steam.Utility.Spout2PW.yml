@@ -13,6 +13,12 @@ build-options:
   prefix: /app/utils/Spout2PW
   append-path: /usr/lib/sdk/mingw-w64/bin:/usr/lib/sdk/mingw-w64/x86_64-w64-mingw32/bin/
 modules:
+  - name: vulkan-headers
+    buildsystem: cmake-ninja
+    sources:
+      - type: archive
+        url: https://github.com/KhronosGroup/Vulkan-Headers/archive/v1.3.297/Vulkan-Headers-v1.3.297.tar.gz
+        sha256: 1d679e2edc43cb7ad818b81dea960e374f1d6dd082325eb9b4c6113e76263c02
   - name: spout2pw
     buildsystem: simple
     build-options:
