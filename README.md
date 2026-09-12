@@ -1,6 +1,6 @@
 # com.valvesoftware.Steam.Utility.Spout2PW
 
-Flatpak for [Spout2PW](https://github.com/hoshinolina/spout2pw).
+Flatpak for [Spout2PW](https://github.com/hoshinolina/spout2pw)'s [Fork](https://github.com/tasokait/spout2pw).
 
 Spout2PW is an extension for Proton/Wine that bridges [Spout2](https://spout.zeal.co) video streams into [PipeWire](https://www.pipewire.org) video streams.
 
